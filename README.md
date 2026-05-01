@@ -1,29 +1,25 @@
-[https://gptonline.ai/](https://gptonline.ai/)
 
-Perfeito — então vou transformar o teu projeto num **README com storytelling completo, nível Data Analyst júnior**, pronto para impressionar no GitHub 👇
-
----
 
 ```markdown
 # 🛒 E-commerce Data Analysis Project (SQL)
 
 ## 📌 Visão Geral
 
-Este projeto simula a análise de dados de um e-commerce com o objetivo de gerar insights de negócio a partir de dados relacionais utilizando SQL.
+Este projeto tem como objetivo modelar, implementar e analisar um banco de dados relacional para um sistema de e-commerce utilizando SQL.
 
-Através de modelagem de dados, consultas analíticas e otimização de performance, foram extraídas informações relevantes para apoiar decisões estratégicas.
+O foco está em transformar dados em **insights de negócio**, simulando o trabalho de um Data Analyst.
 
 ---
 
 ## 🎯 Problema de Negócio
 
-Uma empresa de e-commerce deseja entender:
+Uma empresa de e-commerce deseja responder:
 
-- Quem são seus clientes mais valiosos  
-- Como os pedidos estão distribuídos  
-- Quais produtos têm melhor desempenho  
-- Como o frete impacta o negócio  
-- Quais oportunidades existem para melhoria  
+- Quem são os clientes mais valiosos?
+- Quais produtos têm melhor desempenho?
+- Como os pedidos evoluem ao longo do tempo?
+- O frete impacta o comportamento de compra?
+- Como otimizar faturamento e logística?
 
 ---
 
@@ -31,7 +27,7 @@ Uma empresa de e-commerce deseja entender:
 
 ```
 
-📁 ecommerce-sql/
+📁 ecommerce-sql-analysis/
 │
 ├── 01_schema.sql
 ├── 02_inserts.sql
@@ -41,7 +37,11 @@ Uma empresa de e-commerce deseja entender:
 ├── 06_views.sql
 │
 ├── docs/
+│   ├── modelo_er.png
+│   └── modelo_er.mwb
+│
 ├── assets/
+│   └── modelo_er.pdf
 │
 ├── .gitignore
 └── README.md
@@ -50,9 +50,9 @@ Uma empresa de e-commerce deseja entender:
 
 ---
 
-## 🧱 Modelagem de Dados
+## 🧱 Modelagem do Banco de Dados
 
-O banco foi projetado com as principais entidades de um e-commerce:
+O banco foi projetado para representar um sistema completo de e-commerce, incluindo:
 
 - Cliente
 - Pedido
@@ -60,16 +60,45 @@ O banco foi projetado com as principais entidades de um e-commerce:
 - Pagamento
 - Estoque
 - Fornecedor
-
-O modelo entidade-relacionamento está disponível em:
-
-- `docs/modelo_er.png`
-- `docs/modelo_er.mwb`
-- `assets/modelo_er.pdf`
+- Vendedor Terceiro
 
 ---
 
-## ⚙️ Tecnologias
+## 📊 Modelo Entidade-Relacionamento
+
+### 🔎 Visualização do Modelo
+
+![Modelo ER](docs/modelo_er.png)
+
+---
+
+### 🧠 Interpretação do Modelo
+
+O modelo segue boas práticas de normalização e relacionamentos:
+
+### 🔹 Relacionamentos principais:
+
+- **Cliente (1:N Pedido)**  
+  → Um cliente pode fazer vários pedidos  
+
+- **Pedido (1:N Pagamento)**  
+  → Um pedido pode ter múltiplos pagamentos  
+
+- **Pedido (N:N Produto)** via `Pedido_Produto`  
+  → Um pedido pode conter vários produtos  
+
+- **Produto (N:N Fornecedor)** via `Produto_Fornecedor`  
+  → Um produto pode ter múltiplos fornecedores  
+
+- **Produto (N:N Estoque)** via `Produto_Estoque`  
+  → Controle de inventário distribuído  
+
+- **Produto (N:N Vendedor Terceiro)**  
+  → Marketplace (modelo tipo Amazon/Mercado Livre)  
+
+---
+
+## ⚙️ Tecnologias Utilizadas
 
 - MySQL  
 - SQL (DDL, DML, DQL)  
@@ -77,158 +106,132 @@ O modelo entidade-relacionamento está disponível em:
 
 ---
 
-## 📊 Metodologia de Análise
+## 📄 O que foi desenvolvido
 
-A análise foi realizada em etapas:
+### 🔹 1. Modelagem (01_schema.sql)
 
-1. Exploração dos dados (queries básicas)  
-2. Análise de negócio (queries analíticas)  
-3. Otimização (índices)  
-4. Abstração (views)  
-
----
-
-# 📈 Principais Análises e Insights
+- Criação das tabelas  
+- Definição de chaves primárias e estrangeiras  
+- Constraints (NOT NULL, UNIQUE)  
+- Estrutura relacional completa  
 
 ---
 
-## 🧍 Clientes
+### 🔹 2. Inserção de Dados (02_inserts.sql)
 
-### 🔎 Análise
-- Contagem de pedidos por cliente  
-- Identificação de clientes recorrentes  
-- Ranking de clientes  
-
-### 💡 Insights
-- Existem clientes com maior frequência de compra  
-- Possibilidade de segmentação:
-  - Clientes frequentes  
-  - Clientes ocasionais  
-
-👉 Ações sugeridas:
-- Criar programa de fidelidade  
-- Ofertas personalizadas  
+- Dados fictícios realistas  
+- Clientes, produtos, pedidos e pagamentos  
+- Simulação de ambiente de produção  
 
 ---
 
-## 📦 Produtos
+### 🔹 3. Queries Básicas (03_queries_basicas.sql)
 
-### 🔎 Análise
-- Classificação por avaliação (CASE)  
-- Produtos mais caros por categoria  
-- Preço médio por categoria  
+Consultas fundamentais:
 
-### 💡 Insights
-- Produtos com baixa avaliação precisam de revisão  
-- Categorias possuem grande variação de preço  
+- SELECT e filtros  
+- ORDER BY  
+- JOIN  
+- GROUP BY  
+- Agregações  
 
-👉 Ações sugeridas:
-- Melhorar qualidade de produtos mal avaliados  
-- Ajustar estratégia de preços  
-
----
-
-## 🚚 Logística (Frete)
-
-### 🔎 Análise
-- Classificação de frete (baixo, médio, alto)  
-- Soma e média de frete por cliente  
-
-### 💡 Insights
-- Fretes altos podem impactar conversão  
-- Existe variação significativa no custo logístico  
-
-👉 Ações sugeridas:
-- Avaliar políticas de frete grátis  
-- Otimizar distribuição logística  
+📊 Exemplos:
+- Clientes por localização  
+- Produtos por preço  
+- Pedidos por status  
 
 ---
 
-## 💳 Pagamentos
+### 🔹 4. Queries Analíticas (04_queries_analiticas.sql)
 
-### 🔎 Análise
-- Total de transações por tipo  
-- Ticket médio por método de pagamento  
+Consultas com foco em negócio:
 
-### 💡 Insights
-- Métodos de pagamento possuem comportamentos diferentes  
-- Alguns apresentam maior ticket médio  
-
-👉 Ações sugeridas:
-- Incentivar métodos mais rentáveis  
-- Oferecer benefícios por tipo de pagamento  
-
----
-
-## 🏆 Performance de Clientes
-
-### 🔎 Análise
-- Ranking com RANK()  
-- Ordem de pedidos com ROW_NUMBER()  
-- Segmentação com CASE  
-
-### 💡 Insights
-- É possível identificar clientes estratégicos  
-- Segmentação facilita campanhas direcionadas  
-
-👉 Ações sugeridas:
-- CRM e campanhas segmentadas  
-- Remarketing  
-
----
-
-# 🧠 Técnicas Utilizadas
-
-- JOINs entre múltiplas tabelas  
-- GROUP BY e agregações  
-- CASE WHEN (lógica de negócio)  
+- CASE WHEN (classificação)  
 - COALESCE (tratamento de nulos)  
-- SUBSTRING (manipulação de texto)  
+- SUBSTRING (texto)  
 - Funções de data  
 - CTE (WITH)  
 - Window Functions (ROW_NUMBER, RANK)  
-- Índices para otimização  
-- Views para reutilização  
+
+📊 Exemplos:
+- Segmentação de clientes  
+- Ranking de clientes  
+- Análise temporal de pedidos  
+- Classificação de produtos  
 
 ---
 
-# ⚡ Performance
+### 🔹 5. Performance (05_indexes_performance.sql)
 
-Foram aplicados índices para:
-
-- Melhorar filtros (WHERE)  
-- Acelerar JOINs  
-- Otimizar ORDER BY  
-
-Utilização de:
-
-```sql
-EXPLAIN
-````
-
-para análise de execução das queries.
+- Criação de índices  
+- Índices compostos  
+- Uso de EXPLAIN  
+- Otimização de consultas  
 
 ---
 
-# 📊 Views Criadas
+### 🔹 6. Views (06_views.sql)
 
-As views permitem simplificar análises complexas:
+Criação de abstrações para facilitar análise:
 
-* Clientes + pedidos
-* Detalhes dos pedidos
-* Faturamento por pedido
-* Estoque consolidado
-* Pagamentos
+- Clientes + pedidos  
+- Detalhes dos pedidos  
+- Faturamento por pedido  
+- Estoque consolidado  
 
 ---
 
-# 🚀 Como Executar
+## 📈 Principais Insights
 
-1. Criar estrutura:
+### 🧍 Clientes
+- Identificação de clientes recorrentes  
+- Possibilidade de segmentação (frequente vs ocasional)  
 
+---
+
+### 📦 Produtos
+- Produtos com baixa avaliação precisam de revisão  
+- Variação de preços entre categorias  
+
+---
+
+### 🚚 Logística
+- Fretes altos impactam o comportamento de compra  
+- Oportunidade de políticas de frete  
+
+---
+
+### 💳 Pagamentos
+- Diferença de ticket médio por método  
+- Possibilidade de incentivo a meios específicos  
+
+---
+
+### 📅 Tempo
+- Análise de pedidos por mês  
+- Tempo entre pedido e pagamento  
+
+---
+
+## 🧠 Técnicas Aplicadas
+
+- Modelagem relacional  
+- Normalização  
+- Joins complexos  
+- Funções analíticas  
+- CTE  
+- Window Functions  
+- Índices  
+- Views  
+
+---
+
+## 🚀 Como Executar
+
+1. Criar banco:
 ```sql
 01_schema.sql
-```
+````
 
 2. Inserir dados:
 
@@ -243,7 +246,7 @@ As views permitem simplificar análises complexas:
 04_queries_analiticas.sql
 ```
 
-4. (Opcional) Performance:
+4. Performance:
 
 ```sql
 05_indexes_performance.sql
@@ -257,12 +260,30 @@ As views permitem simplificar análises complexas:
 
 ---
 
-# 🎯 Conclusão
+## 🎯 Conclusão
 
-Este projeto demonstra como SQL pode ser utilizado não apenas para manipulação de dados, mas como ferramenta de análise estratégica.
+Este projeto demonstra como SQL pode ser utilizado para:
 
-Os dados foram transformados em insights que podem apoiar decisões reais de negócio em um e-commerce.
+* Estruturar dados
+* Analisar comportamento de clientes
+* Gerar insights estratégicos
+* Apoiar decisões de negócio
 
+---
+
+## 🔮 Próximos Passos
+
+* Dashboard em Power BI
+* Integração com Python
+* KPIs de negócio
+* Análise preditiva
+
+---
+
+## 👨‍💻 Autor
+
+Felipe Tamiozzo
+Projeto desenvolvido para prática de SQL e análise de dados.
 
 ```
 
