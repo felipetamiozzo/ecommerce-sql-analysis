@@ -1,0 +1,13 @@
+# VS Code
+.vscode/
+
+# Sessões MySQL
+*.sessions.sql
+
+# Arquivos temporários
+*.log
+*.tmp
+
+# Sistema
+.DS_Store
+Thumbs.db
