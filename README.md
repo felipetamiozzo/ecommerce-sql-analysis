@@ -260,25 +260,6 @@ Criação de abstrações para facilitar análise:
 
 ---
 
-## 🎯 Conclusão
-
-Este projeto demonstra como SQL pode ser utilizado para:
-
-* Estruturar dados
-* Analisar comportamento de clientes
-* Gerar insights estratégicos
-* Apoiar decisões de negócio
-
----
-
-## 🔮 Próximos Passos
-
-* Dashboard em Power BI
-* Integração com Python
-* KPIs de negócio
-* Análise preditiva
-
----
 
 ## 👨‍💻 Autor
 
